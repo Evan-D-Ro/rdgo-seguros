@@ -18,12 +18,12 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Detecta seção visível (como na sua JN Navbar)
+  // Detecta qual seção está visível
   useEffect(() => {
     const sections = document.querySelectorAll("section[id]");
     const observer = new IntersectionObserver(
       (entries) => {
-        let mostVisibleSection = null;
+        let mostVisibleSection: string | null = null;
         let maxRatio = 0;
 
         entries.forEach((entry) => {
@@ -35,19 +35,22 @@ const Navbar = () => {
 
         if (mostVisibleSection) setActiveSection(mostVisibleSection);
       },
-      { threshold: Array.from({ length: 11 }, (_, i) => i / 10) } // thresholds 0, 0.1, 0.2 ... 1
+      {
+        // 👇 Compensa a altura do navbar fixo
+        rootMargin: "-100px 0px 0px 0px",
+        threshold: Array.from({ length: 11 }, (_, i) => i / 10),
+      }
     );
 
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
   }, []);
 
-
   // Scroll suave ao clicar
   const handleScrollTo = (href: string) => {
     const id = href.replace("#", "");
     const element = document.getElementById(id);
-    const offset = 100;
+    const offset = 100; // mesma altura compensada do rootMargin
 
     if (element) {
       const position = element.getBoundingClientRect().top + window.scrollY - offset;
@@ -81,11 +84,14 @@ const Navbar = () => {
           {/* Logo */}
           <a href="#hero" onClick={() => handleScrollTo("#hero")} className="flex items-center">
             <img
-              src={isScrolled ? logoRdgo : logoRdgoPB}
+              src={isScrolled || isMobileMenuOpen ? logoRdgo : logoRdgoPB}
               alt="RDGO Seguros"
               className="h-20 w-auto object-contain transition-all duration-500"
             />
+
           </a>
+
+
 
           {/* Desktop menu */}
           <div className="hidden lg:flex items-center gap-8">
@@ -95,9 +101,7 @@ const Navbar = () => {
                 onClick={() => handleScrollTo(link.href)}
                 className={`relative font-medium transition-all duration-300 
                   ${activeSection === link.href.replace("#", "")
-                    ? isScrolled
-                      ? "text-secondary"
-                      : "text-secondary"
+                    ? "text-secondary"
                     : isScrolled
                       ? "text-navy-dark hover:text-secondary"
                       : "text-white hover:text-secondary"
@@ -128,7 +132,7 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className={`h-6 w-6 ${isScrolled ? "text-navy-dark" : "text-white"}`} />
+              <X className={`h-6 w-6 ${isScrolled ? "text-navy-dark" : "text-secondary"}`} />
             ) : (
               <Menu className={`h-6 w-6 ${isScrolled ? "text-navy-dark" : "text-white"}`} />
             )}

@@ -25,8 +25,9 @@ const Index = () => {
 
       <News />
       <Videos />
-      <QuoteForm />
       <FAQ />
+      <QuoteForm />
+
       <Footer />
       <WhatsAppFloat />
     </div>

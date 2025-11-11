@@ -1,36 +1,73 @@
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink, Calendar } from "lucide-react";
+import Preloader from "@/components/Preloader";
 
 const News = () => {
-  // Placeholder news - In production, this would fetch from RSS feeds
-  const newsItems = [
-    {
-      title: "Novas Tendências em Seguros Digitais para 2025",
-      source: "CQCS",
-      date: "15 Jan 2025",
-      description: "O mercado de seguros passa por transformação digital acelerada com novas tecnologias.",
-      link: "https://cqcs.com.br"
-    },
-    {
-      title: "Como Escolher o Seguro Auto Ideal",
-      source: "InfoMoney",
-      date: "12 Jan 2025",
-      description: "Guia completo para entender coberturas e escolher a melhor proteção para seu veículo.",
-      link: "https://www.infomoney.com.br"
-    },
-    {
-      title: "Seguros Residenciais: O Que Mudou em 2025",
-      source: "Revista Apólice",
-      date: "10 Jan 2025",
-      description: "Novas coberturas e condições especiais para proteção patrimonial residencial.",
-      link: "https://revistaapolice.com.br"
-    }
-  ];
+  const [newsItems, setNewsItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const feeds = [
+          "https://cqcs.com.br/feed/",
+          "https://www.infomoney.com.br/feed/",
+          "https://revistaapolice.com.br/feed/"
+        ];
+
+        await new Promise((resolve) => setTimeout(resolve, 10000));
+
+        const all = await Promise.all(
+          feeds.map(async (url) => {
+            const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${url}`);
+            const data = await res.json();
+            return data.items.slice(0, 2).map((item) => ({
+              title: item.title,
+              description: item.description.replace(/<[^>]+>/g, ""),
+              link: item.link,
+              date: new Date(item.pubDate).toLocaleDateString("pt-BR"),
+              source: data.feed.title,
+            }));
+          })
+        );
+
+        setNewsItems(all.flat());
+      } catch (err) {
+        console.error("Erro ao carregar notícias:", err);
+      } finally {
+        // 🔸 Delay suave para permitir o fade-out antes de renderizar
+        setTimeout(() => setLoading(false), 800);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="news" className="pt-24 pb-12 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-navy-dark mb-4">
+              Notícias e <span className="text-secondary">Atualizações</span>
+            </h2>
+            <p className="text-xl text-foreground/70">
+              Fique por dentro das últimas novidades do mercado de seguros
+            </p>
+          </div>
+        </div>
+        <div className="flex justify-center items-center bg-background">
+          <Preloader />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="news" className="pt-24 pb-12 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in">
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-navy-dark mb-4">
             Notícias e <span className="text-secondary">Atualizações</span>
           </h2>
@@ -43,9 +80,8 @@ const News = () => {
           {newsItems.map((item, index) => (
             <Card
               key={index}
-              className="hover-lift cursor-pointer group animate-slide-up bg-gradient-to-br from-white to-accent/5 border-l-4 border-accent/30 hover:border-accent shadow-medium hover:shadow-strong"
-              style={{ animationDelay: `${index * 0.2}s` }}
-              onClick={() => window.open(item.link, '_blank')}
+              className="hover-lift cursor-pointer group bg-gradient-to-br from-white to-accent/5 border-l-4 border-accent/30 hover:border-accent shadow-medium hover:shadow-strong"
+              onClick={() => window.open(item.link, "_blank")}
             >
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
@@ -59,7 +95,7 @@ const News = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base mb-4">
+                <CardDescription className="text-base mb-4 line-clamp-3">
                   {item.description}
                 </CardDescription>
                 <div className="flex items-center text-sm text-foreground/60">
@@ -72,7 +108,7 @@ const News = () => {
         </div>
 
         <p className="text-center text-sm text-foreground/60 mt-8">
-          * Conteúdo agregado de fontes confiáveis do mercado de seguros
+          * Conteúdo agregado automaticamente de fontes confiáveis do mercado de seguros
         </p>
       </div>
     </section>

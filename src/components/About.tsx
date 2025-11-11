@@ -7,7 +7,11 @@ import {
   Trophy,
 } from "lucide-react";
 
+import { useState, useEffect } from "react";
+
 import aboutTeam from "@/assets/equipe.jpg";
+import fachada from "@/assets/fachada.png";
+import escritorio from "@/assets/escritorio.jpg";
 
 const About = () => {
   const values = [
@@ -49,6 +53,18 @@ const About = () => {
     },
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const images = [aboutTeam, fachada, escritorio];
+
+  // troca automática a cada 4 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       id="about"
@@ -84,22 +100,42 @@ const About = () => {
         </div>
 
         {/* Frase de impacto */}
-        <blockquote className="text-2xl md:text-3xl font-medium italic text-navy-dark/90 mb-20 border-t-2 border-b-2 py-2 border-secondary pl-6 text-center md:border-0 md:py-0 md:pl-0">
+        <blockquote className="text-2xl md:text-3xl font-medium italic text-navy-dark/90 mb-20 border-t-2 border-b-2 py-2 border-secondary text-center md:border-0 px-2 md:py-0 md:pl-0">
           “Proteção não é sobre seguros. É sobre gente. É sobre você.”
         </blockquote>
 
         {/* Imagem e texto lado a lado equilibrados */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
-          <div className="relative rounded-2xl overflow-hidden shadow-strong order-1 lg:order-none">
-            <img
-              src={aboutTeam}
-              alt="Equipe RDGO"
-              className="w-full h-[480px] object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/20 to-transparent"></div>
+          <div className="relative rounded-2xl overflow-hidden shadow-strong order-1 lg:order-none h-[480px]">
+            {images.map((src, index) => (
+              <img
+                key={index}
+                src={src}
+                alt={`Equipe RDGO ${index + 1}`}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "opacity-100" : "opacity-0"
+                  }`}
+              />
+            ))}
+
+            {/* Gradiente de overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/30 to-transparent"></div>
+
+            {/* Indicadores (bolinhas) */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-secondary scale-110" : "bg-white/50 hover:bg-white/70"
+                    }`}
+                ></button>
+              ))}
+            </div>
+
           </div>
 
-          <div className="space-y-6 text-left">
+
+          <div className="space-y-6 text-left order-2 lg:order-none">
             <div className="p-6 bg-gradient-to-r from-secondary/10 to-secondary/5 rounded-xl border-l-4 border-secondary hover-lift transition-all">
               <h3 className="text-xl font-bold text-navy-dark mb-2">
                 Nossa Missão

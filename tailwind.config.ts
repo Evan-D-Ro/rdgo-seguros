@@ -55,6 +55,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        keyframes: {
+          "logo-fill-loop": {
+            "0%": { clipPath: "inset(100% 0 0 0)" },
+            "50%": { clipPath: "inset(0 0 0 0)" },
+            "100%": { clipPath: "inset(0 0 100% 0)" },
+          },
+        },
+        animation: {
+          "logo-fill-loop": "logo-fill-loop 2.5s ease-in-out infinite",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

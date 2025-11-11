@@ -45,24 +45,21 @@ const QuoteForm = () => {
   };
 
   return (
-    <section id="quote-form" className="py-24 bg-gradient-to-br from-navy-dark via-navy-dark to-accent relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-secondary/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
-      <div className="absolute inset-0 pattern-dots opacity-10"></div>
+    <section id="quote-form" className="pt-12 pb-12 bg-gray-50 text-gray-900 relative overflow-hidden border-t-4 border-secondary">
+      {/* Background Elements - Ajustados para fundo claro */}
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Solicite Sua <span className="text-secondary">Cotação</span>
             </h2>
-            <p className="text-xl text-white/90">
+            <p className="text-xl text-gray-600">
               Preencha o formulário e receba uma proposta personalizada
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-strong p-8 md:p-10 animate-slide-up">
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 md:p-10 animate-slide-up border border-gray-100">
             <div className="space-y-6">
               {/* Nome */}
               <div className="space-y-2">
@@ -137,17 +134,19 @@ const QuoteForm = () => {
               </div>
 
               {/* Submit Button */}
-              <Button
-                type="submit"
-                className="w-full bg-gradient-to-r from-secondary to-secondary/90 hover:from-secondary/90 hover:to-secondary/80 text-white py-6 text-lg shadow-lg hover:shadow-xl transition-all"
-                size="lg"
-              >
-                <Send className="mr-2 h-5 w-5" />
-                Enviar Solicitação
-              </Button>
+              <div className="flex justify-center align-center w-full">
+                <Button
+                  type="submit"
+                  className="bg-gradient-to-r from-secondary to-secondary/90 hover:from-secondary/90 hover:to-secondary/80 text-white py-6 text-lg shadow-lg hover:shadow-xl transition-all"
+                  size="lg"
+                >
+                  <Send className="mr-2 h-5 w-5" />
+                  Enviar Solicitação
+                </Button>
+              </div>
             </div>
 
-            <p className="text-sm text-center text-foreground/60 mt-6">
+            <p className="text-sm text-center text-gray-500 mt-6">
               Ao enviar, em breve um de nossos consultores entrará em contato.
             </p>
           </form>

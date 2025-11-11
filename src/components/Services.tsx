@@ -123,7 +123,7 @@ const Services = () => {
 
           {/* Lado esquerdo - órbitas */}
           <div
-            className="relative flex items-center justify-center sm:justify-start pl-0 sm:pl-12 lg:pl-20 overflow-visible"
+            className="relative flex items-center justify-center sm:justify-start pl-0 sm:pl-12 lg:pl-20 md:pl-0 overflow-visible"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >

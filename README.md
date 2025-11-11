@@ -1,73 +1,47 @@
-# Welcome to your Lovable project
+# 🛡️ RDGO Seguros
 
-## Project info
+Site institucional da **RDGO Seguros**, desenvolvido com foco em performance, acessibilidade e design moderno.
 
-**URL**: https://lovable.dev/projects/9b910c06-9272-4201-956d-d04f4bdda114
+---
 
-## How can I edit this code?
+## 🌐 Sobre o Projeto
 
-There are several ways of editing your application.
+O objetivo deste projeto é apresentar a **RDGO Seguros**, seus serviços, diferenciais e canais de contato de forma clara, responsiva e atraente.  
+O site foi desenvolvido utilizando tecnologias modernas de front-end para garantir uma experiência rápida e agradável em qualquer dispositivo.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/9b910c06-9272-4201-956d-d04f4bdda114) and start prompting.
+## 🧩 Tecnologias Utilizadas
 
-Changes made via Lovable will be committed automatically to this repo.
+Este projeto foi construído com as seguintes ferramentas:
 
-**Use your preferred IDE**
+- ⚡ **Vite** — ambiente de desenvolvimento rápido e moderno  
+- ⚛️ **React + TypeScript** — estrutura principal da aplicação  
+- 🎨 **Tailwind CSS** — estilização responsiva e otimizada  
+- 🧱 **shadcn/ui** — componentes reutilizáveis e acessíveis  
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🧑‍💻 Como Executar Localmente
 
-Follow these steps:
+Para rodar o projeto em ambiente local, siga os passos abaixo.
+
+### Pré-requisitos
+
+- **Node.js** e **npm** instalados  
+  👉 [Instale com NVM](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+### Passos
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# 1️⃣ Clone este repositório
+git clone <URL_DO_SEU_REPOSITORIO>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# 2️⃣ Acesse o diretório do projeto
+cd rdgo-seguros
 
-# Step 3: Install the necessary dependencies.
-npm i
+# 3️⃣ Instale as dependências
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 4️⃣ Inicie o servidor de desenvolvimento
 npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/9b910c06-9272-4201-956d-d04f4bdda114) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)

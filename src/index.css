@@ -6,29 +6,55 @@
 All colors MUST be HSL.
 */
 
+/* ==============================
+   Fontes personalizadas locais
+   ============================== */
+
+/* Cairo */
 @font-face {
-  font-family: 'Cairo';
-  src: url('/src/assets/fonts/Cairo-Regular.woff2') format('woff2'),
-    url('/src/assets/fonts/Cairo-Regular.woff') format('woff');
+  font-family: "Cairo";
+  src: url("/src/assets/fonts/Cairo/static/Cairo-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('/src/assets/fonts/Poppins-Regular.woff2') format('woff2'),
-    url('/src/assets/fonts/Poppins-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Sango Rounded';
-  src: url('/src/assets/fonts/SangoRounded-Bold.woff2') format('woff2'),
-    url('/src/assets/fonts/SangoRounded-Bold.woff') format('woff');
+  font-family: "Cairo";
+  src: url("/src/assets/fonts/Cairo/static/Cairo-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
+
+/* Sango Rounded */
+@font-face {
+  font-family: "Sango Rounded";
+  src: url("/src/assets/fonts/Sango Rounded/sango-rounded-regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sango Rounded";
+  src: url("/src/assets/fonts/Sango Rounded/sango-rounded-bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Poppins */
+@font-face {
+  font-family: "Poppins";
+  src: url("/src/assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/src/assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
 
 @layer base {
   :root {
@@ -103,6 +129,30 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Cairo", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Sango Rounded", "Cairo", sans-serif;
+    font-weight: bold;
+  }
+
+  p,
+  span,
+  li,
+  a,
+  input,
+  button {
+    font-family: "Poppins", "Cairo", sans-serif;
   }
 
   html {
@@ -240,4 +290,23 @@ All colors MUST be HSL.
 .no-scrollbar::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari, Opera */
+}
+
+@keyframes logo-fill-loop {
+  0% {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+/* Mantém o preenchimento “indo e voltando” em loop */
+.animate-logo-fill-loop {
+  animation: logo-fill-loop 2.5s ease-in-out infinite;
 }

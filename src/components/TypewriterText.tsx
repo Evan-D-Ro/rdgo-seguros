@@ -7,11 +7,11 @@ interface TypewriterTextProps {
   pauseTime?: number;
 }
 
-const TypewriterText = ({ 
-  phrases, 
-  typingSpeed = 100, 
-  deletingSpeed = 50, 
-  pauseTime = 2000 
+const TypewriterText = ({
+  phrases,
+  typingSpeed = 100,
+  deletingSpeed = 50,
+  pauseTime = 2000
 }: TypewriterTextProps) => {
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
@@ -48,10 +48,10 @@ const TypewriterText = ({
   }, [currentText, isDeleting, currentPhraseIndex, phrases, typingSpeed, deletingSpeed, pauseTime]);
 
   return (
-    <span className="text-secondary">
+    <h1 className="text-secondary">
       {currentText}
       <span className="animate-pulse">|</span>
-    </span>
+    </h1>
   );
 };
 
