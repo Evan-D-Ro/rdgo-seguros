@@ -3,6 +3,7 @@ import { ArrowRight, Phone } from "lucide-react";
 import { useState } from "react";
 import heroSlide3 from "@/assets/hero-slide-3.webp";
 import TypewriterText from "./TypewriterText";
+import ProgressiveImage from "./ProgressiveImageProps";
 
 const Hero = () => {
   const [currentSlide] = useState(0);
@@ -24,7 +25,11 @@ const Hero = () => {
             className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"
               }`}
           >
-            <img src={slide} alt={`RDGO Proteção ${index + 1}`} className="w-full h-full object-cover" />
+            <ProgressiveImage
+              src={heroSlide3}
+              placeholder={"/hero-slide-3-blur.webp"}
+              className="w-full h-full object-cover"
+            />
           </div>
         ))}
         <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/95 via-navy-dark/80 to-transparent" />
