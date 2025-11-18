@@ -8,22 +8,25 @@ import seta from "@/assets/seta.webp";
 const Testimonials = () => {
   const testimonials = [
     {
-      name: "Maria Silva",
+      name: "Felipe Medeiros",
       rating: 5,
-      text: "Atendimento excepcional! A equipe da RDGO foi super atenciosa e me ajudou a encontrar o melhor seguro para meu carro. Recomendo!",
-      date: "Há 2 semanas"
+      text: "Uma empresa com credibilidade no mercado e sempre pensando em fornecer o melhor para o seu cliente, destaque para o excelente atendimento do corretor Guilherme Parizi.",
+      date: "2025",
+      link: "https://share.google/9S7AKyuuVB65Hcl3j"
     },
     {
-      name: "João Santos",
+      name: "Jessyka Vieira",
       rating: 5,
-      text: "Profissionalismo e transparência do início ao fim. Finalmente encontrei uma corretora que realmente se importa com o cliente. O processo de cotação foi simples e a comunicação, impecável.",
-      date: "Há 1 mês"
+      text: "Ótima. Estamos com eles a alguns anos e o atendimento é excelente. Tudo muito bem explicado e conversado, dando atenção pro que realmente precisamos. As renovações são avisadas com antecedência, coisa que nunca tivemos com outras corretoras. Só temos a agradecer.",
+      date: "2025",
+      link: "https://share.google/PzEQqoJgskQMdlTOj"
     },
     {
-      name: "Ana Oliveira",
+      name: "Mariana Moretti",
       rating: 5,
-      text: "Processo totalmente digital e rápido. Contratei meu seguro residencial em minutos. Adorei a experiência!",
-      date: "Há 3 semanas"
+      text: "Tive uma excelente experiência com a RDgo! O atendimento foi ágil e atencioso, e todas as minhas dúvidas foram esclarecidas com muita paciência. Além disso, o seguro oferecido tem uma ótima cobertura por um preço justo. Recomendo para quem busca segurança e tranquilidade!",
+      date: "2025",
+      link: "https://share.google/9droFFdSnFgUyxGSp"
     }
   ];
 
@@ -49,47 +52,64 @@ const Testimonials = () => {
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto h-full">
           {testimonials.map((testimonial, index) => (
-            <Card
+            <a
+              href={testimonial.link}
+              target="_blank"
+              rel="noopener noreferrer"
               key={index}
-              className="h-full flex flex-col bg-gradient-to-br from-white to-secondary/5 backdrop-blur-sm border-0 hover-lift animate-slide-up shadow-strong border-t-4 border-secondary/30"
-              style={{ animationDelay: `${index * 0.2}s` }}
+              className="
+    group block
+    transition-all duration-300
+    hover:scale-[1.03] hover:shadow-2xl hover:-translate-y-1
+  "
             >
-              <CardContent className="pt-6 flex flex-col flex-1">
-                {/* Ícone decorativo */}
-                <img
-                  src={seta}
-                  className="h-16 w-16 text-secondary/30 mb-4"
-                  alt="Seta Decorativa"
-                />
+              <Card
+                className="
+      h-full flex flex-col
+      bg-gradient-to-br from-white to-secondary/5 backdrop-blur-sm border-0
+      animate-slide-up shadow-strong border-t-4 border-secondary/30
+      transition-all duration-300
+    "
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
 
-                {/* Avaliação */}
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-secondary text-secondary" />
-                  ))}
-                </div>
+                <CardContent className="pt-6 flex flex-col flex-1">
+                  {/* Ícone decorativo */}
+                  <img
+                    src={seta}
+                    className="h-16 w-16 text-secondary/30 mb-4"
+                    alt="Seta Decorativa"
+                  />
 
-                {/* Texto do depoimento */}
-                <p className="text-foreground/80 mb-6 leading-relaxed flex-1 text-justify">
-                  "{testimonial.text}"
-                </p>
-
-                {/* Autor e selo */}
-                <div className="pt-4 border-t border-secondary/10 mt-auto flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-navy-dark">{testimonial.name}</p>
-                    <p className="text-sm text-foreground/60">{testimonial.date}</p>
+                  {/* Avaliação */}
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-secondary text-secondary" />
+                    ))}
                   </div>
 
-                  {/* Selo Google Reviews */}
-                  <img
-                    src={googleBadge}
-                    alt="Avaliação Google"
-                    className="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity duration-300"
-                  />
-                </div>
-              </CardContent>
-            </Card>
+                  {/* Texto do depoimento */}
+                  <p className="text-foreground/80 mb-6 leading-relaxed flex-1 text-justify">
+                    "{testimonial.text}"
+                  </p>
+
+                  {/* Autor e selo */}
+                  <div className="pt-4 border-t border-secondary/10 mt-auto flex items-center justify-between">
+                    <div>
+                      <p className="font-semibold text-navy-dark">{testimonial.name}</p>
+                      <p className="text-sm text-foreground/60">{testimonial.date}</p>
+                    </div>
+
+                    {/* Selo Google Reviews */}
+                    <img
+                      src={googleBadge}
+                      alt="Avaliação Google"
+                      className="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            </a>
           ))}
         </div>
 

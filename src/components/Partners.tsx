@@ -1,18 +1,46 @@
 import React, { useEffect, useRef, useState } from "react";
+import alfa from "@/assets/logos/alfa.webp";
+import aliro from "@/assets/logos/aliro.webp";
+import allianz from "@/assets/logos/allianz.webp";
+import azul from "@/assets/logos/azul.webp";
+import bradesco from "@/assets/logos/bradesco.webp";
+import ezze from "@/assets/logos/ezze.webp";
+import hdi from "@/assets/logos/hdi.webp";
+import ibp from "@/assets/logos/ibp.webp";
+import itau from "@/assets/logos/itau.webp";
+import ituran from "@/assets/logos/ituran.webp";
+import justos from "@/assets/logos/justos.webp";
+import mapfre from "@/assets/logos/mapfre.webp";
+import msig from "@/assets/logos/msig.webp";
+import porto from "@/assets/logos/porto.webp";
+import suhai from "@/assets/logos/suhai.webp";
+import tokio from "@/assets/logos/tokio.webp";
+import yelum from "@/assets/logos/yelum.webp";
+import zurich from "@/assets/logos/zurich.webp";
 
 const Partners: React.FC = () => {
   const basePartners = [
-    "Zurich",
-    "Porto Seguro",
-    "Liberty",
-    "Mapfre",
-    "Tokio Marine",
-    "HDI",
-    "Allianz",
-    "Sompo",
-    "Azul Seguros",
-    "Bradesco",
+    { name: "Alfa Seguros", logo: alfa },
+    { name: "Aliro Seguros", logo: aliro },
+    { name: "Allianz Seguros", logo: allianz },
+    { name: "Azul Seguros", logo: azul },
+    { name: "Bradesco Seguros", logo: bradesco },
+    { name: "Ezze Seguros", logo: ezze },
+    { name: "HDI Seguros", logo: hdi },
+    { name: "IBP Seguros", logo: ibp },
+    { name: "Itaú Seguros", logo: itau },
+    { name: "Ituran Seguros", logo: ituran },
+    { name: "Justos Seguros", logo: justos },
+    { name: "Mapfre Seguros", logo: mapfre },
+    { name: "MSIG Seguros", logo: msig },
+    { name: "Porto Seguro", logo: porto },
+    { name: "Suhai Seguradora", logo: suhai },
+    { name: "Tokio Marine Seguradora", logo: tokio },
+    { name: "Yelum Seguros", logo: yelum },
+    { name: "Zurich Seguros", logo: zurich },
   ];
+
+
 
   // duplicamos para criar o efeito de loop contínuo
   const partners = [...basePartners, ...basePartners];
@@ -163,15 +191,39 @@ const Partners: React.FC = () => {
           {partners.map((partner, idx) => (
             <div
               key={idx}
-              className="flex-shrink-0 w-48 h-24 mx-2 sm:mx-4 mt-2 flex items-center justify-center"
+              className="group flex-shrink-0 w-48 h-24 mx-2 sm:mx-4 mt-2 flex items-center justify-center"
             >
-              <div className="w-full h-full bg-gradient-to-br from-white to-secondary/5 rounded-xl flex items-center justify-center border-2 border-secondary/20 hover:border-secondary transition-all hover:shadow-lg hover:-translate-y-1">
-                <span className="text-lg font-semibold text-navy-dark whitespace-nowrap">
-                  {partner}
-                </span>
+
+              <div
+                className="
+      w-full h-full rounded-xl border-2 border-secondary/20 
+      bg-gradient-to-br from-white to-secondary/5
+      hover:border-secondary transition-all hover:shadow-lg hover:-translate-y-1
+      relative overflow-hidden flex items-center justify-center
+    "
+              >
+                {/* LOGO (visível normalmente, some no hover) */}
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="
+        h-20 w-auto object-contain transition-opacity duration-300
+        opacity-100 group-hover:opacity-0
+      "
+                  draggable={false}
+                />
+
+                {/* TEXTO (invisível, aparece no hover) */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                  <span className="text-sm font-semibold text-center p-2">{partner.name}</span>
+                </div>
+
               </div>
             </div>
+
           ))}
+
+
         </div>
       </div>
 
