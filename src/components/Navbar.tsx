@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
-import logoRdgo from "@/assets/logo-rdgo.png";
-import logoRdgoPB from "@/assets/logo-rdgo-pb.png";
+import logoRdgo from "@/assets/logo-rdgo.webp";
+import logoRdgoPB from "@/assets/logo-rdgo-pb.webp";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

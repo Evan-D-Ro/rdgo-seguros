@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
-import logoRdgo from "@/assets/logo-rdgo-pb.png";
+import logoRdgo from "@/assets/logo-rdgo-pb.webp";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import logoPB from "@/assets/logo-rdgo-pb2.png";
-import logoColorida from "@/assets/logo-rdgo2.png";
+import logoPB from "@/assets/logo-rdgo-pb2.webp";
+import logoColorida from "@/assets/logo-rdgo2.webp";
 
 const Preloader = ({ sectionHeight = "400px" }) => {
     const [loaded, setLoaded] = useState(false);

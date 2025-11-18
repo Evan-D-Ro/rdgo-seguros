@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone } from "lucide-react";
 import { useState } from "react";
-import heroSlide3 from "@/assets/hero-slide-3.jpg";
+import heroSlide3 from "@/assets/hero-slide-3.webp";
 import TypewriterText from "./TypewriterText";
 
 const Hero = () => {

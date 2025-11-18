@@ -16,33 +16,65 @@ const QuoteForm = () => {
     insuranceType: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.phone || !formData.insuranceType) {
+    const lastExecution = localStorage.getItem("lastFormSubmit");
+    const now = Date.now();
+
+    // Se o último envio foi há menos de 60 segundos, bloqueia
+    if (lastExecution && now - parseInt(lastExecution) < 60 * 1000) {
       toast({
-        title: "Campos obrigatórios",
-        description: "Por favor, preencha todos os campos obrigatórios.",
-        variant: "destructive"
+        title: "Aguarde um momento",
+        description: "Você pode enviar novamente após 1 minuto.",
+        variant: "destructive",
       });
       return;
     }
 
-    // Here you would send to WhatsApp or your backend
-    const message = `Olá! Gostaria de solicitar uma cotação:\n\nNome: ${formData.name}\nE-mail: ${formData.email}\nTelefone: ${formData.phone}\nCPF: ${formData.cpf}\nTipo de Seguro: ${formData.insuranceType}`;
-    const whatsappUrl = `https://wa.me/5511941119972?text=${encodeURIComponent(message)}`;
+    if (!formData.name || !formData.email || !formData.phone || !formData.insuranceType) {
+      toast({
+        title: "Campos obrigatórios",
+        description: "Por favor, preencha todos os campos obrigatórios.",
+        variant: "destructive",
+      });
+      return;
+    }
 
-    window.open(whatsappUrl, '_blank');
+    try {
+      const response = await fetch("/send-mail.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any),
+      });
 
-    toast({
-      title: "Solicitação enviada!",
-      description: "Em breve um especialista entrará em contato.",
-    });
+      const result = await response.json();
 
-    // Reset form
-    setFormData({ name: "", email: "", phone: "", cpf: "", insuranceType: "" });
+      if (result.status === "success") {
+        // salva o timestamp do envio
+        localStorage.setItem("lastFormSubmit", now.toString());
+
+        toast({
+          title: "Mensagem enviada!",
+          description: "Recebemos seu contato e retornaremos em breve.",
+        });
+        setFormData({ name: "", email: "", phone: "", cpf: "", insuranceType: "" });
+      } else {
+        toast({
+          title: "Erro ao enviar mensagem",
+          description: result.message || "Tente novamente mais tarde.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Erro de conexão",
+        description: "Não foi possível enviar o formulário.",
+        variant: "destructive",
+      });
+    }
   };
+
 
   return (
     <section id="quote-form" className="pt-12 pb-12 bg-gray-50 text-gray-900 relative overflow-hidden border-t-4 border-secondary">

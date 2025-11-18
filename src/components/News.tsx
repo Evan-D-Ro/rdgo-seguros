@@ -6,17 +6,19 @@ import Preloader from "@/components/Preloader";
 const News = () => {
   const [newsItems, setNewsItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
     const fetchNews = async () => {
+      setLoading(true);
+      setIsFading(false);
+
       try {
         const feeds = [
           "https://cqcs.com.br/feed/",
           "https://www.infomoney.com.br/feed/",
           "https://revistaapolice.com.br/feed/"
         ];
-
-        await new Promise((resolve) => setTimeout(resolve, 10000));
 
         const all = await Promise.all(
           feeds.map(async (url) => {
@@ -33,16 +35,21 @@ const News = () => {
         );
 
         setNewsItems(all.flat());
+
+        // 🔥 inicia animação de saída
+        setIsFading(true);
+
+        // 🔥 desliga só DEPOIS da animação
+        setTimeout(() => setLoading(false), 500);
       } catch (err) {
-        console.error("Erro ao carregar notícias:", err);
-      } finally {
-        // 🔸 Delay suave para permitir o fade-out antes de renderizar
-        setTimeout(() => setLoading(false), 800);
+        console.error(err);
+        setLoading(false);
       }
     };
 
     fetchNews();
   }, []);
+
 
   if (loading) {
     return (
@@ -80,9 +87,21 @@ const News = () => {
           {newsItems.map((item, index) => (
             <Card
               key={index}
-              className="hover-lift cursor-pointer group bg-gradient-to-br from-white to-accent/5 border-l-4 border-accent/30 hover:border-accent shadow-medium hover:shadow-strong"
+              className={`
+        hover-lift cursor-pointer group 
+        bg-gradient-to-br from-white to-accent/5 
+        border-l-4 border-accent/30 hover:border-accent 
+        shadow-medium hover:shadow-strong 
+        
+        opacity-0 translate-y-4 
+        animate-[fadeUp_0.6s_ease-out_forwards] 
+      `}
+              style={{
+                animationDelay: `${index * 0.15}s`,
+              }}
               onClick={() => window.open(item.link, "_blank")}
             >
+
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-semibold text-secondary bg-secondary/10 px-3 py-1 rounded-full">

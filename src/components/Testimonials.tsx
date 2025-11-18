@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import googleBadge from "@/assets/google-review.webp";
-import seta from "@/assets/seta.png";
+import seta from "@/assets/seta.webp";
 
 const Testimonials = () => {
   const testimonials = [

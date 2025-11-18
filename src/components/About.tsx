@@ -9,9 +9,9 @@ import {
 
 import { useState, useEffect } from "react";
 
-import aboutTeam from "@/assets/equipe.jpg";
-import fachada from "@/assets/fachada.png";
-import escritorio from "@/assets/escritorio.jpg";
+import aboutTeam from "@/assets/equipe.webp";
+import fachada from "@/assets/fachada.webp";
+import escritorio from "@/assets/escritorio.webp";
 
 const About = () => {
   const values = [
