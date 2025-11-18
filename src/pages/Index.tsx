@@ -27,9 +27,9 @@ const Index = () => {
       <Videos />
       <FAQ />
       <QuoteForm />
+      <WhatsAppFloat />
 
       <Footer />
-      <WhatsAppFloat />
     </div>
   );
 };

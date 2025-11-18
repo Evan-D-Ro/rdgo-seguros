@@ -16,6 +16,26 @@ const QuoteForm = () => {
     insuranceType: ""
   });
 
+  // Função para aplicar máscara de telefone
+  const maskPhone = (value: string) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/(\d{2})(\d)/, "($1) $2")
+      .replace(/(\d{5})(\d)/, "$1-$2")
+      .substring(0, 15); // evita digitar além do formato
+  };
+
+  // Função para aplicar máscara de CPF
+  const maskCPF = (value: string) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{2})$/, "$1-$2")
+      .substring(0, 14); // tamanho máximo do CPF com máscara
+  };
+
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -100,9 +120,13 @@ const QuoteForm = () => {
                   id="name"
                   placeholder="Digite seu nome completo"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  maxLength={80}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   required
                 />
+
               </div>
 
               {/* Email */}
@@ -113,9 +137,13 @@ const QuoteForm = () => {
                   type="email"
                   placeholder="seu@email.com"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  maxLength={80}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   required
                 />
+
               </div>
 
               {/* Telefone e CPF em grid */}
@@ -126,9 +154,12 @@ const QuoteForm = () => {
                     id="phone"
                     placeholder="(00) 00000-0000"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: maskPhone(e.target.value) })
+                    }
                     required
                   />
+
                 </div>
 
                 <div className="space-y-2">
@@ -137,8 +168,12 @@ const QuoteForm = () => {
                     id="cpf"
                     placeholder="000.000.000-00"
                     value={formData.cpf}
-                    onChange={(e) => setFormData({ ...formData, cpf: e.target.value })}
+                    maxLength={14}
+                    onChange={(e) =>
+                      setFormData({ ...formData, cpf: maskCPF(e.target.value) })
+                    }
                   />
+
                 </div>
               </div>
 

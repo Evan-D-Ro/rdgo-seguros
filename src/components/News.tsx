@@ -71,6 +71,23 @@ const News = () => {
     );
   }
 
+  if (!loading && newsItems.length === 0) {
+    return (
+      <section id="news" className="pt-24 pb-12 bg-background text-center">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-navy-dark mb-4">
+            Notícias e <span className="text-secondary">Atualizações</span>
+          </h2>
+          <p className="text-xl text-foreground/70">
+            Fique por dentro das últimas novidades do mercado de seguros
+          </p>
+        </div>
+
+        <h3 className="text-3xl font-bold text-navy-dark">Não foi possível carregar notícias no momento</h3>
+      </section>
+    );
+  }
+
   return (
     <section id="news" className="pt-24 pb-12 bg-background">
       <div className="container mx-auto px-4">
